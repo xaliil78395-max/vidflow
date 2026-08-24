@@ -13,11 +13,18 @@ function getYtDlpPath(): string {
 }
 
 function getFfmpegPath(): string {
+  if (process.platform === "linux") {
+    return "/usr/bin";
+  }
+
   return process.env.FFMPEG_PATH || "ffmpeg";
 }
 
 function getCookiesPath(): string {
-  return path.join(process.cwd(), "cookies", "youtube.txt");
+  return (
+    process.env.YOUTUBE_COOKIES_PATH ||
+    path.join(process.cwd(), "cookies", "youtube.txt")
+  );
 }
 
 export async function downloadYoutubeMedia(
@@ -217,3 +224,4 @@ export async function downloadYoutubeMp3(
 ): Promise<YoutubeDownloadResult> {
   return downloadYoutubeMedia(sourceUrl, "mp3");
 }
+
