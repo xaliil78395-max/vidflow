@@ -23,7 +23,7 @@ function getFfmpegPath(): string {
 function getCookiesPath(): string {
   return (
     process.env.YOUTUBE_COOKIES_PATH ||
-    path.join(process.cwd(), "cookies", "youtube.txt")
+    path.join(process.cwd(), "cookies", "cookies (1).txt")
   );
 }
 
@@ -224,4 +224,5 @@ export async function downloadYoutubeMp3(
 ): Promise<YoutubeDownloadResult> {
   return downloadYoutubeMedia(sourceUrl, "mp3");
 }
+
 

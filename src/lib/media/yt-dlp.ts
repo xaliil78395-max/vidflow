@@ -1,5 +1,5 @@
 ﻿import { spawn } from "node:child_process";
-
+import path from "node:path";
 const configuredYtDlpPath =
   process.env.YTDLP_PATH?.trim();
 
@@ -7,7 +7,8 @@ const configuredDenoPath =
   process.env.DENO_PATH?.trim();
 
 const cookiesPath =
-  process.env.YOUTUBE_COOKIES_PATH?.trim();
+  process.env.YOUTUBE_COOKIES_PATH?.trim() ||
+  path.join(process.cwd(), "cookies", "cookies (1).txt");
 
 export const ytDlpPath =
   configuredYtDlpPath || "yt-dlp";
@@ -90,5 +91,10 @@ export function runYtDlp(
     });
   });
 }
+
+
+
+
+
 
 
