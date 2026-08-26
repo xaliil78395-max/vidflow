@@ -1,14 +1,14 @@
 ﻿import { spawn } from "node:child_process";
 import path from "node:path";
+
 const configuredYtDlpPath =
   process.env.YTDLP_PATH?.trim();
 
 const configuredDenoPath =
   process.env.DENO_PATH?.trim();
 
-const cookiesPath =
-  process.env.YOUTUBE_COOKIES_PATH?.trim() ||
-  path.join(process.cwd(), "cookies", "cookies (1).txt");
+const configuredCookiesPath =
+  process.env.YOUTUBE_COOKIES_PATH?.trim();
 
 export const ytDlpPath =
   configuredYtDlpPath || "yt-dlp";
@@ -17,7 +17,7 @@ export const denoPath =
   configuredDenoPath || "deno";
 
 export const cookiesFilePath =
-  cookiesPath || "";
+  configuredCookiesPath || "";
 
 export function runYtDlp(
   args: string[]
@@ -31,11 +31,14 @@ export function runYtDlp(
       "--force-ipv4",
       "--no-playlist",
       "--no-warnings",
+
+      // Proven working YouTube client on Railway.
+      "--extractor-args",
+      "youtube:player_client=mweb",
     ];
 
     /*
      * Use Deno when explicitly configured.
-     * Otherwise yt-dlp will use its normal runtime behavior.
      */
     if (configuredDenoPath) {
       finalArgs.push(
@@ -45,12 +48,15 @@ export function runYtDlp(
     }
 
     /*
-     * Only use cookies when explicitly configured.
+     * Cookies are optional.
+     * Only pass them when the environment variable exists.
      */
-    if (cookiesFilePath) {
+    if (
+      configuredCookiesPath
+    ) {
       finalArgs.push(
         "--cookies",
-        cookiesFilePath
+        configuredCookiesPath
       );
     }
 
@@ -61,8 +67,13 @@ export function runYtDlp(
       ytDlpPath
     );
 
-    const child = spawn(
-      /*turbopackIgnore: true*/ ytDlpPath,
+    console.log(
+      "yt-dlp args:",
+      finalArgs.join(" ")
+    );
+
+    const child = spawn(/*turbopackIgnore: true*/
+      ytDlpPath,
       finalArgs,
       {
         windowsHide: true,
@@ -80,7 +91,9 @@ export function runYtDlp(
       stderr += chunk.toString();
     });
 
-    child.on("error", reject);
+    child.on("error", (error) => {
+      reject(error);
+    });
 
     child.on("close", (code) => {
       resolve({
@@ -91,10 +104,4 @@ export function runYtDlp(
     });
   });
 }
-
-
-
-
-
-
 

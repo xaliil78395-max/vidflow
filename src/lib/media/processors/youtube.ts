@@ -31,13 +31,14 @@ export const youtubeProcessor: MediaProcessor = {
 
     const timestamp = Date.now();
 
+    /*
+     * MP3
+     */
     if (formatId === "mp3") {
       const filename = `youtube-${timestamp}.mp3`;
       const outputPath = path.join(outputDir, filename);
 
       const result = await runYtDlp([
-        "--no-playlist",
-        "--no-warnings",
         "--ffmpeg-location",
         process.env.FFMPEG_PATH || "ffmpeg",
         "-x",
@@ -55,6 +56,21 @@ export const youtubeProcessor: MediaProcessor = {
           "YouTube MP3 error:",
           result.stderr || result.stdout
         );
+
+        const details =
+          result.stderr || result.stdout || "";
+
+        if (
+          details.includes("Sign in to confirm") ||
+          details.includes("not a bot")
+        ) {
+          return {
+            success: false,
+            status: "error",
+            message:
+              "YouTube requires authentication. Please check the cookies file.",
+          };
+        }
 
         return {
           success: false,
@@ -86,6 +102,9 @@ export const youtubeProcessor: MediaProcessor = {
       }
     }
 
+    /*
+     * MP4 quality
+     */
     const match = formatId.match(/^mp4-(\d+)$/);
 
     if (!match) {
@@ -106,30 +125,44 @@ export const youtubeProcessor: MediaProcessor = {
       };
     }
 
-    const filename = `youtube-${timestamp}-${height}p.mp4`;
-    const outputPath = path.join(outputDir, filename);
+    const filename =
+      `youtube-${timestamp}-${height}p.mp4`;
+
+    const outputPath =
+      path.join(outputDir, filename);
 
     /*
-     * Prefer an MP4/H.264 video-only format at the requested
-     * resolution, then fall back to the best compatible video.
+     * Known YouTube MP4 video formats.
      *
-     * YouTube formats for this video:
+     * mweb has been tested successfully on Railway:
+     *
      * 144p  -> 160
      * 240p  -> 133
      * 360p  -> 134
      * 480p  -> 135
      * 720p  -> 136
      * 1080p -> 137
+     *
+     * Audio:
+     * 140 -> m4a AAC
+     *
+     * We use yt-dlp's format filters instead of hardcoding
+     * a single format ID because different videos can expose
+     * different format IDs.
      */
     const selector =
-      `bestvideo[height=${height}][ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/` +
-      `bestvideo[height=${height}][ext=mp4]+bestaudio[ext=m4a]/` +
-      `bestvideo[height<=${height}][ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/` +
+      `bestvideo[height=${height}][ext=mp4][vcodec^=avc1]+` +
+      `bestaudio[ext=m4a]/` +
+      `bestvideo[height<=${height}][ext=mp4][vcodec^=avc1]+` +
+      `bestaudio[ext=m4a]/` +
       `best[height<=${height}][ext=mp4]`;
 
+    console.log(
+      "YouTube MP4 selector:",
+      selector
+    );
+
     const result = await runYtDlp([
-      "--no-playlist",
-      "--no-warnings",
       "--ffmpeg-location",
       process.env.FFMPEG_PATH || "ffmpeg",
       "-f",
@@ -174,6 +207,18 @@ export const youtubeProcessor: MediaProcessor = {
         };
       }
 
+      if (
+        details.includes("403") ||
+        details.includes("Forbidden")
+      ) {
+        return {
+          success: false,
+          status: "error",
+          message:
+            "YouTube rejected the media request. Please try again.",
+        };
+      }
+
       return {
         success: false,
         status: "error",
@@ -190,7 +235,8 @@ export const youtubeProcessor: MediaProcessor = {
         status: "ready",
         message:
           `${format.label} processed successfully.`,
-        outputUrl: `/api/files/${encodeURIComponent(filename)}`,
+        outputUrl:
+          `/api/files/${encodeURIComponent(filename)}`,
         media: {
           title: mediaInfo.title,
           formatId,
@@ -201,9 +247,9 @@ export const youtubeProcessor: MediaProcessor = {
       return {
         success: false,
         status: "error",
-        message: "The MP4 file was not created.",
+        message:
+          "The MP4 file was not created.",
       };
     }
   },
 };
-
