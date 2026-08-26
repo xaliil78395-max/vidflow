@@ -1,5 +1,4 @@
 ﻿import { spawn } from "node:child_process";
-import path from "node:path";
 
 const configuredYtDlpPath =
   process.env.YTDLP_PATH?.trim();
@@ -9,6 +8,9 @@ const configuredDenoPath =
 
 const configuredCookiesPath =
   process.env.YOUTUBE_COOKIES_PATH?.trim();
+
+const youtubeUserAgent =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36";
 
 export const ytDlpPath =
   configuredYtDlpPath || "yt-dlp";
@@ -31,11 +33,10 @@ export function runYtDlp(
       "--force-ipv4",
       "--no-playlist",
       "--no-warnings",
+      "--user-agent",
+      youtubeUserAgent,
     ];
 
-    /*
-     * Use Deno when explicitly configured.
-     */
     if (configuredDenoPath) {
       finalArgs.push(
         "--js-runtimes",
@@ -43,13 +44,7 @@ export function runYtDlp(
       );
     }
 
-    /*
-     * Cookies are optional.
-     * Only pass them when the environment variable exists.
-     */
-    if (
-      configuredCookiesPath
-    ) {
+    if (configuredCookiesPath) {
       finalArgs.push(
         "--cookies",
         configuredCookiesPath
@@ -68,7 +63,8 @@ export function runYtDlp(
       finalArgs.join(" ")
     );
 
-    const child = spawn(/*turbopackIgnore: true*/
+    const child = spawn(
+      /*turbopackIgnore: true*/
       ytDlpPath,
       finalArgs,
       {
@@ -100,5 +96,4 @@ export function runYtDlp(
     });
   });
 }
-
 
