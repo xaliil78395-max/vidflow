@@ -233,6 +233,9 @@ export default function Home() {
             <a href="#faq" className="hover:text-blue-600">
               FAQ
             </a>
+            <a href="/guides" className="hover:text-blue-600">
+              Guides
+            </a>
           </nav>
         </div>
       </header>
@@ -678,6 +681,10 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-6">
             <a href="/about" className="hover:text-gray-700">
               About
+            </a>
+
+            <a href="/guides" className="hover:text-gray-700">
+              Guides
             </a>
 
             <a href="/contact" className="hover:text-gray-700">
