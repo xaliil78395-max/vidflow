@@ -13,9 +13,47 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VidFlow - Fast & Simple YouTube Downloader",
+  metadataBase: new URL("https://unique-essence-production-6bed.up.railway.app"),
+
+  title: {
+    default: "VidFlow - Fast & Simple YouTube Downloader",
+    template: "%s | VidFlow",
+  },
+
   description:
-    "VidFlow lets you analyze YouTube videos and download available MP4 video or MP3 audio formats quickly and easily.",
+    "VidFlow is a simple YouTube media processing tool that lets you analyze supported YouTube videos and process available MP4 video and MP3 audio formats.",
+
+  keywords: [
+    "YouTube downloader",
+    "YouTube MP4",
+    "YouTube MP3",
+    "video downloader",
+    "MP4 downloader",
+    "MP3 downloader",
+    "VidFlow",
+  ],
+
+  applicationName: "VidFlow",
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    title: "VidFlow - Fast & Simple YouTube Downloader",
+    description:
+      "Analyze supported YouTube videos and process available MP4 video and MP3 audio formats with VidFlow.",
+    type: "website",
+    siteName: "VidFlow",
+  },
+
+  twitter: {
+    card: "summary",
+    title: "VidFlow - Fast & Simple YouTube Downloader",
+    description:
+      "A simple tool for analyzing supported YouTube videos and processing available MP4 and MP3 formats.",
+  },
 };
 
 export default function RootLayout({

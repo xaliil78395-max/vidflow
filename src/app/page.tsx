@@ -597,12 +597,20 @@ export default function Home() {
             © 2026 VidFlow. All rights reserved.
           </p>
 
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-gray-700">
+          <div className="flex flex-wrap justify-center gap-6">
+            <a href="/about" className="hover:text-gray-700">
+              About
+            </a>
+
+            <a href="/contact" className="hover:text-gray-700">
+              Contact
+            </a>
+
+            <a href="/privacy" className="hover:text-gray-700">
               Privacy
             </a>
 
-            <a href="#" className="hover:text-gray-700">
+            <a href="/terms" className="hover:text-gray-700">
               Terms
             </a>
           </div>
@@ -611,6 +619,8 @@ export default function Home() {
     </main>
   );
 }
+
+
 
 
 
