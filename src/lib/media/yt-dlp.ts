@@ -31,10 +31,6 @@ export function runYtDlp(
       "--force-ipv4",
       "--no-playlist",
       "--no-warnings",
-
-      // Proven working YouTube client on Railway.
-      "--extractor-args",
-      "youtube:player_client=mweb",
     ];
 
     /*
@@ -104,4 +100,5 @@ export function runYtDlp(
     });
   });
 }
+
 

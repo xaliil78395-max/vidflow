@@ -9,7 +9,11 @@ export type YoutubeDownloadResult = {
 };
 
 function getYtDlpPath(): string {
-  return process.env.YTDLP_PATH || "yt-dlp.exe";
+  if (process.platform === "win32") {
+    return "yt-dlp.exe";
+  }
+
+  return process.env.YTDLP_PATH || "/usr/local/bin/yt-dlp";
 }
 
 function getFfmpegPath(): string {
@@ -224,5 +228,11 @@ export async function downloadYoutubeMp3(
 ): Promise<YoutubeDownloadResult> {
   return downloadYoutubeMedia(sourceUrl, "mp3");
 }
+
+
+
+
+
+
 
 
