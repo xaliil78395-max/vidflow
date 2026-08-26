@@ -549,9 +549,15 @@ export default function Home() {
 
       <section id="faq" className="px-6 py-20">
         <div className="mx-auto max-w-3xl">
-          <h2 className="text-center text-3xl font-bold">
-            Frequently asked questions
-          </h2>
+          <div className="text-center">
+            <h2 className="text-3xl font-bold">
+              Frequently asked questions
+            </h2>
+
+            <p className="mt-3 text-gray-500">
+              Answers to common questions about using VidFlow.
+            </p>
+          </div>
 
           <div className="mt-10 space-y-4">
             <details className="rounded-xl border border-gray-200 p-5">
@@ -560,7 +566,8 @@ export default function Home() {
               </summary>
 
               <p className="mt-3 leading-7 text-gray-500">
-                VidFlow supports MP3 audio and the MP4 video qualities available for the selected YouTube video.
+                VidFlow supports MP3 audio and the MP4 video qualities that
+                are available for the selected supported YouTube video.
               </p>
             </details>
 
@@ -570,7 +577,9 @@ export default function Home() {
               </summary>
 
               <p className="mt-3 leading-7 text-gray-500">
-                No. You can analyze and download supported YouTube videos without creating an account.
+                No. The basic VidFlow service does not require an account.
+                You can submit a supported YouTube URL, analyze the video,
+                choose an available format, and process the file.
               </p>
             </details>
 
@@ -580,17 +589,86 @@ export default function Home() {
               </summary>
 
               <p className="mt-3 leading-7 text-gray-500">
-                No. The available quality depends on the
-                original YouTube video. If a selected
-                quality does not exist, VidFlow will show
-                an error instead of creating an incorrect
-                file.
+                No. Available qualities depend on the source video and the
+                media formats that can be processed at the time of the
+                request.
+              </p>
+            </details>
+
+            <details className="rounded-xl border border-gray-200 p-5">
+              <summary className="cursor-pointer font-semibold">
+                How does VidFlow work?
+              </summary>
+
+              <p className="mt-3 leading-7 text-gray-500">
+                Paste a supported YouTube URL, analyze the video, choose MP3
+                audio or an available MP4 quality, and then start processing.
+                When processing is complete, VidFlow provides the generated
+                file for download.
+              </p>
+            </details>
+
+            <details className="rounded-xl border border-gray-200 p-5">
+              <summary className="cursor-pointer font-semibold">
+                Why is a quality sometimes unavailable?
+              </summary>
+
+              <p className="mt-3 leading-7 text-gray-500">
+                VidFlow displays the qualities available for the selected
+                source video. A particular quality may not be available because
+                it is not provided by the source or cannot be processed under
+                the current technical conditions.
+              </p>
+            </details>
+
+            <details className="rounded-xl border border-gray-200 p-5">
+              <summary className="cursor-pointer font-semibold">
+                Can I use VidFlow on a phone?
+              </summary>
+
+              <p className="mt-3 leading-7 text-gray-500">
+                Yes. VidFlow is designed as a web application and can be used
+                from modern mobile and desktop browsers.
+              </p>
+            </details>
+
+            <details className="rounded-xl border border-gray-200 p-5">
+              <summary className="cursor-pointer font-semibold">
+                How long does processing take?
+              </summary>
+
+              <p className="mt-3 leading-7 text-gray-500">
+                Processing time depends on the source video, selected format,
+                requested quality, file size, and current server conditions.
+              </p>
+            </details>
+
+            <details className="rounded-xl border border-gray-200 p-5">
+              <summary className="cursor-pointer font-semibold">
+                What happens to generated files?
+              </summary>
+
+              <p className="mt-3 leading-7 text-gray-500">
+                Generated files may be stored temporarily so they can be
+                downloaded. Older generated files may be automatically removed
+                as part of system maintenance.
+              </p>
+            </details>
+
+            <details className="rounded-xl border border-gray-200 p-5">
+              <summary className="cursor-pointer font-semibold">
+                What should I do if a download fails?
+              </summary>
+
+              <p className="mt-3 leading-7 text-gray-500">
+                Try analyzing the URL again and selecting another available
+                format or quality. If the problem continues, you can contact
+                VidFlow with details about the technical issue.
               </p>
             </details>
           </div>
         </div>
       </section>
-
       <footer className="border-t border-gray-100 px-6 py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-gray-400 md:flex-row">
           <p>
@@ -619,21 +697,4 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
