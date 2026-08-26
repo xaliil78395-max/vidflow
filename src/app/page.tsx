@@ -284,19 +284,6 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="my-8 flex justify-center overflow-hidden">
-              <div
-                id="container-bbbb0439d7505450ce3053cc823ad3ec"
-                className="min-h-[90px]"
-              />
-              <Script
-                id="adsterra-banner"
-                async
-                strategy="afterInteractive"
-                data-cfasync="false"
-                src="https://pl31019455.profitableratecpmnetwork.com/bbbb0439d7505450ce3053cc823ad3ec/invoke.js"
-              />
-            </div>
 
             {analysis && (
               <div className="mx-auto mt-6 overflow-hidden rounded-2xl border border-gray-200 bg-white text-left shadow-lg">
@@ -474,6 +461,20 @@ export default function Home() {
               </div>
             )}
 
+            {/* Main advertisement - placed after the complete results area */}
+            <div className="my-8 flex justify-center overflow-hidden">
+              <div
+                id="container-bbbb0439d7505450ce3053cc823ad3ec"
+                className="min-h-[90px]"
+              />
+              <Script
+                id="adsterra-banner"
+                async
+                strategy="afterInteractive"
+                data-cfasync="false"
+                src="https://pl31019455.profitableratecpmnetwork.com/bbbb0439d7505450ce3053cc823ad3ec/invoke.js"
+              />
+            </div>
             <p className="mt-4 text-sm text-gray-400">
               Download available YouTube video qualities as MP4 or extract audio as MP3.
             </p>
@@ -482,14 +483,6 @@ export default function Home() {
 
         </div>
       </section>
-
-      <div className="mx-auto flex max-w-6xl justify-center px-6 py-8">
-        <Script
-          id="adsterra-second"
-          strategy="afterInteractive"
-          src="https://pl31019456.profitableratecpmnetwork.com/bc/c8/e7/bcc8e7624bdf5ca99cfe254f59bf8545.js"
-        />
-      </div>
 
       <section
         id="how-it-works"
@@ -544,6 +537,15 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Secondary advertisement */}
+      <div className="mx-auto flex max-w-6xl justify-center px-6 py-8">
+        <Script
+          id="adsterra-second"
+          strategy="afterInteractive"
+          src="https://pl31019456.profitableratecpmnetwork.com/bc/c8/e7/bcc8e7624bdf5ca99cfe254f59bf8545.js"
+        />
+      </div>
 
       <section id="faq" className="px-6 py-20">
         <div className="mx-auto max-w-3xl">
@@ -609,6 +611,11 @@ export default function Home() {
     </main>
   );
 }
+
+
+
+
+
 
 
 
