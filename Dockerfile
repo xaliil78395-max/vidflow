@@ -1,4 +1,4 @@
-﻿FROM node:22-bookworm
+FROM node:22-bookworm
 
 # System dependencies
 RUN apt-get update && \
@@ -27,12 +27,13 @@ RUN python3 -m pip install --break-system-packages \
 
 # Build the PO Token generation script
 RUN mkdir -p /opt/bgutil && \
-    curl -L https://github.com/Brainicism/bgutil-ytdlp-pot-provider/archive/refs/tags/1.3.1.tar.gz \
+    curl -L https://github.com/Brainicism/bgutil-ytdlp-pot-provider/archive/refs/tags/1.3.2.tar.gz \
     -o /tmp/bgutil.tar.gz && \
     tar -xzf /tmp/bgutil.tar.gz -C /opt/bgutil --strip-components=1 && \
     cd /opt/bgutil/server && \
     npm ci && \
     npx tsc && \
+    test -f /opt/bgutil/server/build/generate_once.js && \
     rm -f /tmp/bgutil.tar.gz
 
 WORKDIR /app
