@@ -1,4 +1,4 @@
-﻿import { spawn } from "node:child_process";
+import { spawn } from "node:child_process";
 
 const configuredYtDlpPath =
   process.env.YTDLP_PATH?.trim();
@@ -35,6 +35,10 @@ export function runYtDlp(
       "--no-warnings",
       "--user-agent",
       youtubeUserAgent,
+      "--extractor-args",
+      "youtube:player_client=mweb",
+      "--extractor-args",
+      "youtubepot-bgutilscript:script_path=/opt/bgutil/server/build/generate_once.js",
     ];
 
     if (configuredDenoPath) {
@@ -96,4 +100,3 @@ export function runYtDlp(
     });
   });
 }
-
