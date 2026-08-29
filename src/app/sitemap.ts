@@ -1,8 +1,8 @@
-﻿import type { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
-    "https://unique-essence-production-6bed.up.railway.app";
+    "https://vidflow.casa";
 
   return [
     {

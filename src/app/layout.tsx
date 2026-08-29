@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://unique-essence-production-6bed.up.railway.app"),
+  metadataBase: new URL("https://vidflow.casa"),
 
   title: {
     default: "VidFlow - Fast & Simple YouTube Downloader",
@@ -34,6 +34,10 @@ export const metadata: Metadata = {
   ],
 
   applicationName: "VidFlow",
+
+  alternates: {
+    canonical: "/",
+  },
 
   robots: {
     index: true,
@@ -70,3 +74,7 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+
+

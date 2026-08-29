@@ -1,4 +1,4 @@
-﻿import type { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         "/generated/",
       ],
     },
-    sitemap: "https://unique-essence-production-6bed.up.railway.app/sitemap.xml",
+    sitemap: "https://vidflow.casa/sitemap.xml",
   };
 }
